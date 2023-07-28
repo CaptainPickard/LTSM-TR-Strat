@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow import keras
+import matplotlib.pyplot as plt
 
 prep_data = 'Histoy/BTC-USD/Processed/Processed data'
 df = pd.read_csv(prep_data)
@@ -33,8 +34,8 @@ from keras.models import Sequential
 from keras.layers import LSTM, Dense
 
 model = Sequential()
-model.add(LSTM(50, input_shape=(time_steps, 4)))
-model.add(Dense(4))  # Output layer with 4 neurons (Open, High, Low, Close)
+model.add(LSTM(100, input_shape=(time_steps, 9)))
+model.add(Dense(9))  # Output layer with 4 neurons (Open, High, Low, Close, and 5 more EMA's)
 model.compile(optimizer='adam', loss='mse')  # Use Mean Squared Error (MSE) as the loss function
 
 # Model Training
@@ -56,4 +57,11 @@ predicted_price = scaler.inverse_transform(predicted_price)
 print("Predicted Price for the Next Day:")
 print(predicted_price)
 
+#Plottings
+plt.plot(df['close'], label='Daily Close')
+plt.plot(df['50EMA'], label='50 EMA')
+plt.plot(predicted_price, label='Prediction')
 
+plt.legend(loc=3)
+
+plt.show()
