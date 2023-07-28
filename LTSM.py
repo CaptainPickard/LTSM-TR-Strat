@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-from tensorflow import keras
 import matplotlib.pyplot as plt
 
 prep_data = 'Histoy/BTC-USD/Processed/Processed data'
@@ -45,7 +44,6 @@ model.fit(X_train, y_train, epochs=50, batch_size=16, verbose=1)
 # Evaluate the model on the test data to see how well it performs.
 loss = model.evaluate(X_test, y_test, verbose=0)
 print(f"Test Loss: {loss:.6f}")
-
 
 # Assuming 'last_data' contains the last 'time_steps' data points in the training set
 # Use it as the input for predicting the next day's price
