@@ -63,12 +63,12 @@ predicted_prices = scaler.inverse_transform(np.array(predicted_prices).reshape(-
 import matplotlib.pyplot as plt
 
 # Create an array with the corresponding dates for plotting
-# dates = pd.to_datetime(df['time'].iloc[-10:]) + pd.to_timedelta(10, unit='D')
+dates = pd.to_datetime(df['time'].iloc[-10:]) + pd.to_timedelta(10, unit='D')
 
 # Plot the actual close prices and the predicted close prices
 plt.figure(figsize=(10, 6))
-plt.plot(df['close'], label='Actual Close Prices')
-plt.plot(predicted_prices, label='Predicted Close Prices', linestyle='dashed')
+plt.plot(df['time'], df['close'], label='Actual Close Prices')
+plt.plot(dates, predicted_prices, label='Predicted Close Prices', linestyle='dashed')
 plt.xlabel('Time')
 plt.ylabel('Close Price')
 plt.title('Actual and Predicted Close Prices')
