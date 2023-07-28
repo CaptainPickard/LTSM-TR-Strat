@@ -3,11 +3,11 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow import keras
 
-
-df = pd.DataFrame('Prepared dataset')
+prep_data = 'Histoy/BTC-USD/Processed/Processed data'
+df = pd.read_csv(prep_data)
 
 # Assuming you have a DataFrame named 'df' with columns: 'Open', 'High', 'Low', 'Close', '200EMA'
-data = df[['Open', 'High', 'Low', 'Close', '5EMA', '13EMA', '50EMA', '200EMA', '800EMA']].values
+data = df[['open', 'high', 'low', 'close', '5EMA', '13EMA', '50EMA', '200EMA', '800EMA']].values
 
 # Normalize the data using MinMaxScaler
 scaler = MinMaxScaler()
