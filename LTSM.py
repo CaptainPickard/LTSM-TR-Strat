@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
+import tensorflow as tf
+
 
 prep_data = 'Histoy/BTC-USD/Processed/Processed data'
 df = pd.read_csv(prep_data)

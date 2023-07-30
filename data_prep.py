@@ -1,7 +1,8 @@
 import pandas as pd
 
 # Import the data file for adding additional features/colums for learning purposes
-file_path = 'Histoy/BTC-USD/BTC-USD[2015-01-01-00-00].csv'
+file = 'ETH-USD[2015-01-01-00-00].csv'
+file_path = f'Histoy/ETH-USD/{file}'
 df = pd.read_csv(file_path)
 
 # Assuming you have a DataFrame named 'df' with a 'Close' price column
@@ -11,6 +12,6 @@ df['50EMA'] = df['close'].ewm(span=50, adjust=False).mean()
 df['200EMA'] = df['close'].ewm(span=200, adjust=False).mean()
 df['800EMA'] = df['close'].ewm(span=800, adjust=False).mean()
 
-complete = df.to_csv("Histoy/BTC-USD/Processed/Processed data")
+complete = df.to_csv(f"Histoy/BTC-USD/Processed/{file}Processed")
 print(complete)
 

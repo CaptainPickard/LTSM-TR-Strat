@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import tensorflow as tf
 
 # Read the CSV file into a pandas DataFrame
 data = 'Histoy/BTC-USD/BTC-USD[2015-01-01-00-00].csv'
