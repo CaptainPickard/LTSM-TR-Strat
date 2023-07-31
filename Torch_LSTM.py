@@ -3,11 +3,12 @@ import pandas_ta as ta
 
 print('---- Step 1: Data Preparation ----')
 
-file = ('Histoy\ETH-USD\ETH-USD[2015-06-01-00-00].csv')
+file = ('Histoy\BTC-USD\BTC-USD[2015-01-01-00-00].csv')
 df = pd.read_csv(file)
 # Calculate the price returns as the target variable
 df['EMA50'] = ta.ema(df['close'], length=50)
 df['returns'] = df['close'].pct_change().fillna(0)
+returns = df['close'].pct_change().values[1:]
 
 print('---- Step 2: Standardization ----')
 
@@ -111,7 +112,7 @@ with torch.no_grad():
     next_day_return = model(last_data_tensor).item()
 
 # Inverse transform the predicted return to get the actual return value
-next_day_return = scaler.inverse_transform([[next_day_return]])[0][0]
+next_day_return = scaler.inverse_transform([[next_day_return]])[1][5]
 
 print("Predicted Return for the Next Day:")
 print(next_day_return)
