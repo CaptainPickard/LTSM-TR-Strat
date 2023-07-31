@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import pandas_ta as ta
 
-file = ('Histoy\BTC-USD\BTC-USD[2015-01-01-00-00].csv')
+file = ('Histoy\ETH-USD\ETH-USD[2015-06-01-00-00].csv')
 pre_pross = pd.read_csv(file)
 
 # Adding a "Adj close" column
