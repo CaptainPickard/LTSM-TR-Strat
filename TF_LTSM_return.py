@@ -24,12 +24,10 @@ print('--------- Step 3: Standardize the input features')
 
 # Create a StandardScaler object
 scaler = StandardScaler()
-
 # Standardize the input features
 X_scaled = scaler.fit_transform(X)
 
 print('--------- Step 4: Convert the target variable to percentage return')
-
 
 # Assuming the 'percentage_return' values are decimal values, not percentages
 # Convert the target variable to percentage return by multiplying by 100
@@ -54,7 +52,6 @@ model.compile(optimizer='adam', loss='mse')  # Use Mean Squared Error (MSE) as t
 
 print('--------- Step 7: Train the model')
 
-
 model.fit(X_train, y_train, epochs=50, batch_size=16, verbose=1)
 
 
@@ -62,7 +59,6 @@ print('--------- Step 8: Make predictions and convert back to percentage returns
 
 # Predict the percentage returns on the test data
 y_pred = model.predict(X_test)
-
 # Convert the predicted percentage returns back to raw decimal values
 y_pred_decimal = y_pred / 100
 
@@ -71,15 +67,12 @@ print('--------- Step 9: Inverse transform the scaled output')
 
 # Inverse transform the predicted output to the original scale
 y_pred_original_scale = scaler.inverse_transform(y_pred_decimal)
-
 # Assuming 'last_data' contains the last 5 data points in the training set
 # Use it as the input for predicting the next day's percentage return
 last_data = X_train[-1].reshape(1, -1)
 next_day_percentage_return = model.predict(last_data)
-
 # Convert the predicted percentage return back to raw decimal value
 next_day_percentage_return_decimal = next_day_percentage_return / 100
-
 # Inverse transform the scaled percentage return to the original scale
 next_day_percentage_return_original_scale = scaler.inverse_transform(next_day_percentage_return_decimal)
 print(next_day_percentage_return_original_scale)

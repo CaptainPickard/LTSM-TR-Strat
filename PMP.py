@@ -2,9 +2,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import pandas_ta as ta
+from Historic_Crypto import HistoricalData
+import os
 
-file = ('Histoy\ETH-USD\ETH-USD[2015-01-01-00-00].csv')
-pre_pross = pd.read_csv(file)
+# Gets Crypto Asstet
+user_input = input("Please enter at crypto ticker: ")
+ticker = f'{user_input.upper()}-USD'
+# denoted in seconds
+time = 86400 # currently looking at daily TF
+Lookback_date = '2015-01-01-00-00'
+
+new = HistoricalData(ticker,time,Lookback_date).retrieve_data()
+
+pre_pross = pd.DataFrame(new)
 
 # Adding a "Adj close" column
 pre_pross = pre_pross.assign(**{'Adj Close': pre_pross['close'].copy()})
@@ -22,7 +32,8 @@ pre_pross['RSI'] = ta.rsi(pre_pross.close, length=15)
 # pre_pross['Target'] = pre_pross['Adj Close'].shift(-1)
 # pre_pross['TargetClass'] = [1 if pre_pross.Target[i]>0 else 0 for i in range(len(data))]
 
-# getting the closing price of the 5 days
+# dates used for later when plotting
+
 
 # pre_pross['TargetNextClose'] = pre_pross['percentage_return'].shift(-1)
 pre_pross['TargetNextClose'] = pre_pross['Adj Close'].shift(-1)
@@ -42,7 +53,7 @@ data_set_scaled = scaler.fit_transform(pre_pross)
 
 X = []
 # choose backcandles here, originaly set to 30
-backcandles = 50
+backcandles = 30
 # print(data_set_scaled.shape[0])
 for j in range(10):
     X.append([])
@@ -87,11 +98,20 @@ output = Activation('linear', name='output')(inputs)
 model = Model(inputs=lstm_input, outputs=output)
 adam = optimizers.Adam()
 model.compile(optimizer=adam, loss='mse')
-model.fit(x=X_train, y=y_train, batch_size=15, epochs=50, shuffle=True, validation_split = 0.1)
+model.fit(x=X_train, y=y_train, batch_size=20, epochs=50, shuffle=True, validation_split = 0.1)
 
 y_pred = model.predict(X_test)
 
 # Plotting 4 different timeframes of the output data
+
+# Inverse transform the scaled predictions 'y_pred' to the original scale
+print("Shape of y_pred:", y_pred.shape)
+print("Shape of y_test:", y_test.shape)
+
+
+# y_pred_original_scale = scaler.inverse_transform(y_pred)
+# # Inverse transform the scaled 'y_test' to the original scale for evaluation (if needed)
+# y_test_original_scale = scaler.inverse_transform(y_test)
 
 y_test_1000 = y_test[-1000:]
 y_pred_1000 = y_pred[-1000:]
