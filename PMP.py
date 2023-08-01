@@ -3,11 +3,12 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import pandas_ta as ta
 
-file = ('Histoy\ETH-USD\ETH-USD[2015-06-01-00-00].csv')
+file = ('Histoy\ETH-USD\ETH-USD[2015-01-01-00-00].csv')
 pre_pross = pd.read_csv(file)
 
 # Adding a "Adj close" column
 pre_pross = pre_pross.assign(**{'Adj Close': pre_pross['close'].copy()})
+# pre_pross['percentage_return'] = pre_pross['close'].pct_change() * 100
 
 # Processing the data file using some TR ema indicators
 pre_pross['EMA5'] = ta.ema(pre_pross.close, length=5)
@@ -15,13 +16,15 @@ pre_pross['EMA13'] = ta.ema(pre_pross.close, length=13)
 pre_pross['EMA50'] = ta.ema(pre_pross.close, length=50)
 pre_pross['EMA200'] = ta.ema(pre_pross.close, length=200)
 pre_pross['EMA800'] = ta.ema(pre_pross.close, length=800)
-pre_pross['RSI'] = ta.rsi(pre_pross.close, length=15)
+pre_pross['RSI'] = ta.rsi(pre_pross.close, length=5)
 
 # pre_pross['Target'] = pre_pross['Adj Close']-pre_pross.Open
 # pre_pross['Target'] = pre_pross['Adj Close'].shift(-1)
 # pre_pross['TargetClass'] = [1 if pre_pross.Target[i]>0 else 0 for i in range(len(data))]
 
 # getting the closing price of the 5 days
+
+# pre_pross['TargetNextClose'] = pre_pross['percentage_return'].shift(-1)
 pre_pross['TargetNextClose'] = pre_pross['Adj Close'].shift(-1)
 pre_pross.dropna(inplace=True)
 pre_pross.reset_index(inplace=True)
@@ -31,10 +34,10 @@ pre_pross.drop(['volume', 'close', 'time'], axis=1, inplace=True)
 print('\n**Formatting Data Complete**\n')
 
 # Now applying the sklearn algorithm
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
 
-sc = MinMaxScaler(feature_range=(0,1))
-data_set_scaled = sc.fit_transform(pre_pross)
+scaler = StandardScaler()
+data_set_scaled = scaler.fit_transform(pre_pross)
 # print(data_set_scaled)
 
 X = []
@@ -57,7 +60,6 @@ y = np.reshape(yi,(len(yi), 1))
 print('\n**Splitting data into Testing and Training sets**\n')
 
 splitlimit = int(len(X)*0.8)
-# print(splitlimit)
 X_train, X_test = X[:splitlimit], X[:splitlimit]
 y_train, y_test = y[:splitlimit], y[:splitlimit]
 
@@ -79,7 +81,7 @@ from keras.models import Model
 import numpy as np
 
 lstm_input = Input(shape=(backcandles, 10), name='LSTM_Input')
-inputs = LSTM(200, name='first_layer')(lstm_input)
+inputs = LSTM(150, name='first_layer')(lstm_input)
 inputs = Dense(1, name='dense_layer')(inputs)
 output = Activation('linear', name='output')(inputs)
 model = Model(inputs=lstm_input, outputs=output)
@@ -88,32 +90,47 @@ model.compile(optimizer=adam, loss='mse')
 model.fit(x=X_train, y=y_train, batch_size=15, epochs=50, shuffle=True, validation_split = 0.1)
 
 y_pred = model.predict(X_test)
-#y_pred=np.where(y_pred > 0.43, 1,0)
-# for i in range(10):
-#     print(y_pred[i], y_test[i])
+
+# Plotting 4 different timeframes of the output data
+
+y_test_1000 = y_test[-1000:]
+y_pred_1000 = y_pred[-1000:]
+
+y_test_500 = y_test[-500:]
+y_pred_500 = y_pred[-500:]
 
 y_test_100 = y_test[-100:]
 y_pred_100 = y_pred[-100:]
 
-# Last Hundred rows dataset
-# plt.figure(figsize=(16,8))
-# plt.plot(y_test_100, color = 'black', label = 'Test')
-# plt.plot(y_pred_100, color = 'green', label = 'Pred')
-# plt.legend()
-fig, axes = plt.subplots(1, 2, figsize=(15, 6))
+y_test_50 = y_test[-50:]
+y_pred_50 = y_pred[-50:]
 
-axes[0].plot(y_test_100, color = 'black', label = 'Test')
-axes[0].plot(y_pred_100, color = 'green', label = 'Pred')
-axes[0].legend()
-axes[0].set_title('Last 100 Rows of Dataset')
-axes[0].grid(True)
+fig, axes = plt.subplots(2, 2, figsize=(15, 8))
 
-# Fulldataset
-axes[1].plot(y_test, color = 'black', label = 'Test')
-axes[1].plot(y_pred, color = 'green', label = 'Pred')
-axes[1].legend()
-axes[1].set_title('Full Dataset')
-axes[1].grid(True)
+axes[0, 0].plot(y_test_1000, color = 'black', label = 'Test')
+axes[0, 0].plot(y_pred_1000, color = 'green', label = 'Pred')
+axes[0, 0].legend()
+axes[0, 0].set_title('Last 1000 Rows of Dataset')
+axes[0, 0].grid(True)
+
+axes[0, 1].plot(y_test_500, color = 'black', label = 'Test')
+axes[0, 1].plot(y_pred_500, color = 'orange', label = 'Pred')
+axes[0, 1].legend()
+axes[0, 1].set_title('Last 500 Rows of Dataset')
+axes[0, 1].grid(True)
+
+axes[1, 0].plot(y_test_100, color = 'black', label = 'Test')
+axes[1, 0].plot(y_pred_100, color = 'blue', label = 'Pred')
+axes[1, 0].legend()
+axes[1, 0].set_title('Last 100 Rows of Dataset')
+axes[1, 0].grid(True)
+
+# axes[1, 1].plot(pre_pross['close'], color = 'black', label = 'Actual')
+axes[1, 1].plot(y_test_50, color = 'black', label = 'Test')
+axes[1, 1].plot(y_pred_50, color = 'red', label = 'Pred')
+axes[1, 1].legend()
+axes[1, 1].set_title('Last 50 Rows of Dataset')
+axes[1, 1].grid(True)
 
 plt.tight_layout()
 plt.show()
