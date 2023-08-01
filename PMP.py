@@ -16,7 +16,7 @@ pre_pross['EMA13'] = ta.ema(pre_pross.close, length=13)
 pre_pross['EMA50'] = ta.ema(pre_pross.close, length=50)
 pre_pross['EMA200'] = ta.ema(pre_pross.close, length=200)
 pre_pross['EMA800'] = ta.ema(pre_pross.close, length=800)
-pre_pross['RSI'] = ta.rsi(pre_pross.close, length=5)
+pre_pross['RSI'] = ta.rsi(pre_pross.close, length=15)
 
 # pre_pross['Target'] = pre_pross['Adj Close']-pre_pross.Open
 # pre_pross['Target'] = pre_pross['Adj Close'].shift(-1)
