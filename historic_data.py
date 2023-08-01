@@ -5,7 +5,7 @@ import os
 ticker = 'BTC-USD'
 # denoted in seconds
 time = 86400 # currently looking at daily TF
-Lookback_date = '2020-01-01-00-00'
+Lookback_date = '2015-01-01-00-00'
 
 new = HistoricalData(ticker,time,Lookback_date).retrieve_data()
 print(new)

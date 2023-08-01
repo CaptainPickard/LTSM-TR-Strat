@@ -92,10 +92,30 @@ y_pred = model.predict(X_test)
 # for i in range(10):
 #     print(y_pred[i], y_test[i])
 
-plt.figure(figsize=(16,8))
-plt.plot(y_test, color = 'black', label = 'Test')
-plt.plot(y_pred, color = 'green', label = 'Pred')
-plt.legend()
+y_test_100 = y_test[-100:]
+y_pred_100 = y_pred[-100:]
+
+# Last Hundred rows dataset
+# plt.figure(figsize=(16,8))
+# plt.plot(y_test_100, color = 'black', label = 'Test')
+# plt.plot(y_pred_100, color = 'green', label = 'Pred')
+# plt.legend()
+fig, axes = plt.subplots(1, 2, figsize=(15, 6))
+
+axes[0].plot(y_test_100, color = 'black', label = 'Test')
+axes[0].plot(y_pred_100, color = 'green', label = 'Pred')
+axes[0].legend()
+axes[0].set_title('Last 100 Rows of Dataset')
+axes[0].grid(True)
+
+# Fulldataset
+axes[1].plot(y_test, color = 'black', label = 'Test')
+axes[1].plot(y_pred, color = 'green', label = 'Pred')
+axes[1].legend()
+axes[1].set_title('Full Dataset')
+axes[1].grid(True)
+
+plt.tight_layout()
 plt.show()
 
 

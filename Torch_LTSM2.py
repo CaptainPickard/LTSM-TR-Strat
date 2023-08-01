@@ -13,7 +13,8 @@ df.reset_index(inplace=True)
 df.drop(['index', 'time', 'volume'], axis=1, inplace=True)
 features = df[['low', 'high', 'open', 'close', 'EMA50']].values
 returns = df['close'].pct_change().values[1:]  # Calculate returns as percentage change from the previous day's close
-print(df.head())
+# print(features, returns)
+# print(df.head())
 
 
 print('---- Step 2: Standardize the Data ----')
@@ -21,7 +22,7 @@ print('---- Step 2: Standardize the Data ----')
 from sklearn.preprocessing import StandardScaler
 # Standardize the features using Z-score scaling
 scaler = StandardScaler()
-features = scaler.fit_transform(features)
+scaled_features = scaler.fit_transform(features)
 
 
 
@@ -42,7 +43,7 @@ sequence_length = 10
 while 2929 % sequence_length != 0:
     sequence_length -= 1
 # Create sequences for LSTM training
-X, y = create_sequences(returns, sequence_length)
+X, y = create_sequences(scaled_features, sequence_length)
 
 
 
@@ -61,9 +62,9 @@ train_data = TensorDataset(X, y)
 train_loader = DataLoader(train_data, batch_size=16, shuffle=True)
 
 # Define the LSTM model
-for batch_X, batch_y in train_loader:
-    print("Batch X shape:", batch_X.shape)
-    print("Batch y shape:", batch_y.shape)
+# for batch_X, batch_y in train_loader:
+#     print("Batch X shape:", batch_X.shape)
+#     print("Batch y shape:", batch_y.shape)
 
 class LSTMModel(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
@@ -78,7 +79,7 @@ class LSTMModel(nn.Module):
 
 # Initialize the model
 # input_size = features.shape[1]
-input_size = 5
+input_size = scaled_features.shape[1]
 hidden_size = 50
 output_size = 1  # Predicting returns
 model = LSTMModel(input_size, hidden_size, output_size)
@@ -119,5 +120,5 @@ predicted_prices = scaler.inverse_transform(predicted_returns)
 last_close_price = df['close'].iloc[-1]
 price_predictions = last_close_price * (1 + predicted_returns.cumsum())
 
-print(last_close_price, price_predictions)
+# print(last_close_price, price_predictions)
 
