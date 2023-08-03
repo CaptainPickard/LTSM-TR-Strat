@@ -11,9 +11,7 @@ ticker = f'{user_input.upper()}-USD'
 # denoted in seconds
 time = 86400 # currently looking at daily TF
 Lookback_date = '2015-01-01-00-00'
-
 new = HistoricalData(ticker,time,Lookback_date).retrieve_data()
-
 pre_pross = pd.DataFrame(new)
 
 # Adding a "Adj close" column
@@ -39,7 +37,7 @@ pre_pross['RSI'] = ta.rsi(pre_pross.close, length=15)
 pre_pross['TargetNextClose'] = pre_pross['Adj Close'].shift(-1)
 pre_pross.dropna(inplace=True)
 pre_pross.reset_index(inplace=True)
-pre_pross.drop(['volume', 'close', 'time'], axis=1, inplace=True)
+pre_pross.drop(['volume', 'time'], axis=1, inplace=True)
 
 # print(pre_pross.head())
 print('\n**Formatting Data Complete**\n')
@@ -55,7 +53,7 @@ X = []
 # choose backcandles here, originaly set to 30
 backcandles = 30
 # print(data_set_scaled.shape[0])
-for j in range(10):
+for j in range(11):
     X.append([])
     for i in range(backcandles, data_set_scaled.shape[0]):
         X[j].append(data_set_scaled[i-backcandles:i, j])
@@ -91,7 +89,7 @@ from keras.callbacks import History
 from keras.models import Model
 import numpy as np
 
-lstm_input = Input(shape=(backcandles, 10), name='LSTM_Input')
+lstm_input = Input(shape=(backcandles, 11), name='LSTM_Input')
 inputs = LSTM(150, name='first_layer')(lstm_input)
 inputs = Dense(1, name='dense_layer')(inputs)
 output = Activation('linear', name='output')(inputs)
@@ -108,10 +106,11 @@ y_pred = model.predict(X_test)
 print("Shape of y_pred:", y_pred.shape)
 print("Shape of y_test:", y_test.shape)
 
-
 # y_pred_original_scale = scaler.inverse_transform(y_pred)
-# # Inverse transform the scaled 'y_test' to the original scale for evaluation (if needed)
 # y_test_original_scale = scaler.inverse_transform(y_test)
+
+# print("Shape of orignal y_pred:", y_pred_original_scale.shape)
+# print("Shape of orignal y_test:", y_test_original_scale.shape)
 
 y_test_1000 = y_test[-1000:]
 y_pred_1000 = y_pred[-1000:]
