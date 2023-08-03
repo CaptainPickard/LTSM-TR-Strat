@@ -145,7 +145,6 @@ axes[1, 0].legend()
 axes[1, 0].set_title('Last 100 Rows of Dataset')
 axes[1, 0].grid(True)
 
-# axes[1, 1].plot(pre_pross['close'], color = 'black', label = 'Actual')
 axes[1, 1].plot(y_test_50, color = 'black', label = 'Test')
 axes[1, 1].plot(y_pred_50, color = 'red', label = 'Pred')
 axes[1, 1].legend()
