@@ -5,6 +5,16 @@ import pandas_ta as ta
 from Historic_Crypto import HistoricalData
 import os
 
+# Tensroflow library imports
+from keras.layers import LSTM
+from keras.layers import Dense
+from keras.layers import Input, Activation
+
+import tensorflow as tf
+from keras import optimizers
+from keras.models import Model
+import numpy as np
+
 # Gets Crypto Asstet
 user_input = input("Please enter at crypto ticker: ")
 ticker = f'{user_input.upper()}-USD'
@@ -68,15 +78,6 @@ y_train, y_test = y[:splitlimit], y[:splitlimit]
 
 print('\n**Fitting the Model**\n')
 
-from keras.layers import LSTM
-from keras.layers import Dense
-from keras.layers import Input, Activation
-
-import tensorflow as tf
-from keras import optimizers
-from keras.models import Model
-import numpy as np
-
 X_train_normalized = tf.keras.utils.normalize(X_train, axis=1)
 X_test_normalized = tf.keras.utils.normalize(X_test, axis=1)
 
@@ -96,6 +97,9 @@ scaling_factors = np.max(y_train, axis=0)
 
 # Inverse transform the scaled predictions 'y_pred' to the original scale
 y_pred_original_scale = y_pred * scaling_factors
+
+
+print('\n**Defining and plotting the data**\n')
 
 # Plotting 4 different timeframes of the output data
 # Last 500 Rows of Price
