@@ -14,8 +14,8 @@ new = HistoricalData(ticker,time,Lookback_date).retrieve_data()
 pre_pross = pd.DataFrame(new)
 
 # Adding a "Adj close" column
-pre_pross = pre_pross.assign(**{'Adj Close': pre_pross['close'].copy()})
-# pre_pross['percentage_return'] = pre_pross['close'].pct_change() * 100
+# pre_pross = pre_pross.assign(**{'Adj Close': pre_pross['close'].copy()})
+pre_pross['percentage_return'] = pre_pross['close'].pct_change() * 100
 
 # Processing the data file using some TR ema indicators
 pre_pross['EMA5'] = ta.ema(pre_pross.close, length=5)
@@ -29,8 +29,8 @@ pre_pross['RSI'] = ta.rsi(pre_pross.close, length=15)
 # pre_pross['Target'] = pre_pross['Adj Close'].shift(-1)
 # pre_pross['TargetClass'] = [1 if pre_pross.Target[i]>0 else 0 for i in range(len(data))]
 
-# pre_pross['TargetNextClose'] = pre_pross['percentage_return'].shift(-1)
-pre_pross['TargetNextClose'] = pre_pross['Adj Close'].shift(-1)
+pre_pross['TargetNextClose'] = pre_pross['percentage_return'].shift(-1)
+# pre_pross['TargetNextClose'] = pre_pross['Adj Close'].shift(-1)
 pre_pross.dropna(inplace=True)
 pre_pross.reset_index(inplace=True)
 pre_pross.drop(['volume', 'time'], axis=1, inplace=True)
