@@ -88,9 +88,9 @@ model = Model(inputs=lstm_input, outputs=output)
 adam = optimizers.Adam()
 model.compile(optimizer=adam, loss='mse')
 model.fit(x=
-X_test_normalized, y=y_train, batch_size=15, epochs=50, shuffle=True, validation_split = 0.1)
+X_train_normalized, y=y_train, batch_size=15, epochs=50, shuffle=True, validation_split = 0.1)
 
-y_pred = model.predict(X_test)
+y_pred = model.predict(X_test_normalized)
 
 scaling_factors = np.max(y_train, axis=0)
 
