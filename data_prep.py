@@ -1,17 +1,25 @@
 import pandas as pd
+import pandas_ta as ta
 
-# Import the data file for adding additional features/colums for learning purposes
-file = 'ETH-USD[2015-01-01-00-00].csv'
-file_path = f'Histoy/ETH-USD/{file}'
-df = pd.read_csv(file_path)
 
-# Assuming you have a DataFrame named 'df' with a 'Close' price column
-df['5EMA'] = df['close'].ewm(span=5, adjust=False).mean()
-df['13EMA'] = df['close'].ewm(span=13, adjust=False).mean()
-df['50EMA'] = df['close'].ewm(span=50, adjust=False).mean()
-df['200EMA'] = df['close'].ewm(span=200, adjust=False).mean()
-df['800EMA'] = df['close'].ewm(span=800, adjust=False).mean()
+def format_data(pre_pross):
+    pre_pross['percentage_return'] = pre_pross['close'].pct_change() * 100
 
-complete = df.to_csv(f"Histoy/BTC-USD/Processed/{file}Processed")
-print(complete)
+    # Processing the data file using some TR ema indicators
+    pre_pross['EMA5'] = ta.ema(pre_pross.close, length=5)
+    pre_pross['EMA13'] = ta.ema(pre_pross.close, length=13)
+    pre_pross['EMA50'] = ta.ema(pre_pross.close, length=50)
+    pre_pross['EMA200'] = ta.ema(pre_pross.close, length=200)
+    pre_pross['EMA800'] = ta.ema(pre_pross.close, length=800)
+    pre_pross['RSI'] = ta.rsi(pre_pross.close, length=15)
 
+    # pre_pross['Target'] = pre_pross['Adj Close']-pre_pross.Open
+    # pre_pross['Target'] = pre_pross['Adj Close'].shift(-1)
+    # pre_pross['TargetClass'] = [1 if pre_pross.Target[i]>0 else 0 for i in range(len(data))]
+
+    pre_pross['TargetNextClose'] = pre_pross['percentage_return'].shift(-1)
+    # pre_pross['TargetNextClose'] = pre_pross['Adj Close'].shift(-1)
+    pre_pross.dropna(inplace=True)
+    pre_pross.reset_index(inplace=True)
+    pre_pross.drop(['volume', 'time'], axis=1, inplace=True)
+    return pre_pross
