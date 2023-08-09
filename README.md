@@ -10,4 +10,4 @@ Some key differences with my Tensorflow approach..
 
 1. The model does not use a mim max scaler, why? Becasue min max scaling is terrible for predicting price action. Asset prices have ever incresing all time highs. which throw the model out off since min max scaling is bound between ranges 0 - 1, and cant capture ever increasing all time highs. Thats why this approach use standardization as its scaler function.
 
-2. The model is designed for predicting price returns, not price itself. Pridicting the actual closing price of an asset is a fools errand, and why almost all models fail at getting accurate predictions. This model takes a different approach, and trys to predict the daily percentage either up or down.
+2. The model is designed for predicting price returns, not price itself. Predicting the actual closing price of an asset is a fools errand, and why almost all models fail at getting accurate predictions. This model takes a different approach, and trys to predict the daily percentage either up or down.

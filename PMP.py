@@ -17,9 +17,6 @@ from keras.models import Model
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
-# post_pross = get_user_crypto()
-# x_pross = format_data(post_pross)
-
 def mlm_model(pre_pross):
     scaler = StandardScaler()
     data_set_scaled = scaler.fit_transform(pre_pross)
