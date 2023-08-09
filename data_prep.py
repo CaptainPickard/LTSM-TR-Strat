@@ -22,4 +22,5 @@ def format_data(pre_pross):
     pre_pross.dropna(inplace=True)
     pre_pross.reset_index(inplace=True)
     pre_pross.drop(['volume', 'time'], axis=1, inplace=True)
+    print('\n**Formatting Data Complete**\n')
     return pre_pross

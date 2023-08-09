@@ -7,7 +7,6 @@ from historic_data import get_user_crypto
 from data_prep import format_data
 import os
 
-# Tensroflow library imports
 from keras.layers import LSTM
 from keras.layers import Dense
 from keras.layers import Input, Activation
@@ -16,18 +15,12 @@ import tensorflow as tf
 from keras import optimizers
 from keras.models import Model
 import numpy as np
-
-
-post_pross = get_user_crypto()
-pre_pross = format_data(post_pross)
-
-# print(pre_pross.head())
-print('\n**Formatting Data Complete**\n')
-
-# Now applying the sklearn algorithm
 from sklearn.preprocessing import StandardScaler
 
-def mlm_model():
+# post_pross = get_user_crypto()
+# x_pross = format_data(post_pross)
+
+def mlm_model(pre_pross):
     scaler = StandardScaler()
     data_set_scaled = scaler.fit_transform(pre_pross)
     # print(data_set_scaled)
@@ -77,8 +70,8 @@ def mlm_model():
 
     print('\n**Defining and plotting the data**\n')
 
-# Plotting 4 different timeframes of the output data
-# Last 500 Rows of Price
+    # Plotting 4 different timeframes of the output data
+    # Last 500 Rows of Price
 
     x_close_500 = pre_pross['close'][-500:]
     x_ema_500 = pre_pross['EMA50'][-500:]
@@ -139,5 +132,3 @@ def mlm_model():
     plt.show()
 
 
-
-mlm_model()
