@@ -1,6 +1,6 @@
-# LTSM-TR-Strat
+## LTSM-TR-Strat
 
-Python project for creating various different LTSM training models
+# Python project for creating market LTSM training models
 
 Most of this is just for learning purposes modeling "forward" testing trading strategies. using simple EMA and RSI values. 
 
