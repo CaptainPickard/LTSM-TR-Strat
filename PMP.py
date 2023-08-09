@@ -1,15 +1,6 @@
-import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
-import pandas_ta as ta
-from Historic_Crypto import HistoricalData
-from historic_data import get_user_crypto
-from data_prep import format_data
-import os
 
-from keras.layers import LSTM
-from keras.layers import Dense
-from keras.layers import Input, Activation
+from keras.layers import Input, Activation, Dense, LSTM
 
 import tensorflow as tf
 from keras import optimizers
@@ -69,7 +60,6 @@ def mlm_model(pre_pross):
 
     # Plotting 4 different timeframes of the output data
     # Last 500 Rows of Price
-
     x_close_500 = pre_pross['close'][-500:]
     x_ema_500 = pre_pross['EMA50'][-500:]
     x_ema_200 = pre_pross['EMA200'][-500:]
