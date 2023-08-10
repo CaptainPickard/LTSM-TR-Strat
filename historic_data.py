@@ -11,7 +11,7 @@ def get_user_crypto():
     Lookback_date = '2015-01-01-00-00'
     new = HistoricalData(ticker,time,Lookback_date).retrieve_data()
     pre_pross = pd.DataFrame(new)
-    return pre_pross
+    return pre_pross, ticker
 
 
 
