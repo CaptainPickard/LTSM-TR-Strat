@@ -12,11 +12,6 @@ def format_data(pre_pross):
     pre_pross['EMA200'] = ta.ema(pre_pross.close, length=200)
     pre_pross['EMA800'] = ta.ema(pre_pross.close, length=800)
     pre_pross['RSI'] = ta.rsi(pre_pross.close, length=15)
-
-    # pre_pross['Target'] = pre_pross['Adj Close']-pre_pross.Open
-    # pre_pross['Target'] = pre_pross['Adj Close'].shift(-1)
-    # pre_pross['TargetClass'] = [1 if pre_pross.Target[i]>0 else 0 for i in range(len(data))]
-
     pre_pross['TargetNextClose'] = pre_pross['percentage_return'].shift(-1)
     # pre_pross['TargetNextClose'] = pre_pross['Adj Close'].shift(-1)
     pre_pross.dropna(inplace=True)

@@ -44,16 +44,17 @@ def mlm_model(pre_pross):
     model = Model(inputs=lstm_input, outputs=output)
     adam = optimizers.Adam()
     model.compile(optimizer=adam, loss='mse')
-    model.fit(x=
-    X_train_normalized, y=y_train, batch_size=15, epochs=50, shuffle=True, validation_split = 0.1)
+    model.fit(x=X_train_normalized, y=y_train, batch_size=15, epochs=50, shuffle=True, validation_split = 0.1)
 
     y_pred = model.predict(X_test_normalized)
+    train_x = model.predict(X_train_normalized)
 
     scaling_factors_pred = np.max(y_train, axis=0)
     scaling_factors_train = np.max(y_test, axis=0)
 
     # Inverse transform the scaled predictions 'y_pred' to the original scale
     y_pred_original_scale = y_pred * scaling_factors_pred
-    y_train_original_scale = y_pred * scaling_factors_train
+    # y_train_original_scale = train_x * scaling_factors_train
     
-    return pre_pross, y_test, y_pred_original_scale
+    # for middle return value y_train was used previously
+    return pre_pross, y_train, y_pred_original_scale
