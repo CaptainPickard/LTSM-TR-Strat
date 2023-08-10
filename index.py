@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
         plotting(plot1, plot2, plot3)
 
-        user_input = input("\nWould you like to try anoter Crypto? (Y/N): \n").upper()
+        user_input = input("\nWould you like to try anoter Crypto? (Y/N): ").upper()
         if user_input == 'N':
             break
         elif user_input == 'Y':

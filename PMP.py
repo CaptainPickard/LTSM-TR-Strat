@@ -1,7 +1,5 @@
 import matplotlib.pyplot as plt
-
 from keras.layers import Input, Activation, Dense, LSTM
-
 import tensorflow as tf
 from keras import optimizers
 from keras.models import Model
@@ -51,9 +49,11 @@ def mlm_model(pre_pross):
 
     y_pred = model.predict(X_test_normalized)
 
-    scaling_factors = np.max(y_train, axis=0)
+    scaling_factors_pred = np.max(y_train, axis=0)
+    scaling_factors_train = np.max(y_test, axis=0)
 
     # Inverse transform the scaled predictions 'y_pred' to the original scale
-    y_pred_original_scale = y_pred * scaling_factors
+    y_pred_original_scale = y_pred * scaling_factors_pred
+    y_train_original_scale = y_pred * scaling_factors_train
     
     return pre_pross, y_test, y_pred_original_scale
