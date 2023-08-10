@@ -13,10 +13,10 @@ if __name__ == '__main__':
         print(f"\n Asset: {ticker}\n")
 
         last_element1 = (plot3[-1])
-        print(f'\n Tomorrows {ticker} Predicted Gain/loss: {last_element1}%\n')
+        print(f'\n Todays {ticker} Predicted Gain/loss: {last_element1}%\n')
         
         test_element2 = (plot2[-1])
-        print(f'\n Todays {ticker} Actual Gain/loss: {test_element2}%\n')
+        print(f'\n Tmorrows {ticker} Predicted Gain/loss: {test_element2}%\n')
 
         plotting(plot1, plot2, plot3)
 
