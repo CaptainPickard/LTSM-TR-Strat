@@ -5,8 +5,6 @@ import matplotlib.pyplot as plt
 def plotting(pre_pross, y_test, y_pred_original_scale):
     print('\n**Defining and plotting the data**\n')
 
-    # last_element1 = (y_pred_original_scale[-1])
-    # print(f'\n Tomorrows Predicted Gain/loss: {last_element1}%\n')
     # Plotting 4 different timeframes of the output data
     # Last 500 Rows of Price
     x_close_500 = pre_pross['close'][-500:]
