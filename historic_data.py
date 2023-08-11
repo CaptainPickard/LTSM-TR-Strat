@@ -21,7 +21,7 @@ def get_user_forex():
     print("\nEURUSD GBPUSD USDJPY AUDUSD USDCAD\n")
     user_input = input("\nPlease enter at Forex ticker: \n")
 
-    ticker = f'{user_input.upper()}-USD'
+    ticker = f'{user_input.upper()}=x'
     # Format the date as yyyy-mm-dd
     formatted_date = today.strftime('%Y-%m-%d')
     forex_pair = "GBPUSD=X"
