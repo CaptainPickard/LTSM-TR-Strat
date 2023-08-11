@@ -27,10 +27,10 @@ if __name__ == '__main__':
         elif user_save == 'Y':
             save_to_csv(last_element1, test_element2, ticker)
         
-        user_input = input("\nTry anoter Crypto? (Y/N): ").upper()
-        if user_input == 'N':
+        user_end = input("\nTry anoter Crypto? (Y/N): ").upper()
+        if user_end == 'N':
             break
-        elif user_input == 'Y':
+        elif user_end == 'Y':
             continue
         
     
