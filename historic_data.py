@@ -7,7 +7,7 @@ import os
 
 # Gets Crypto Asstet
 def get_user_crypto():
-    user_input = input("Please enter at crypto ticker: ")
+    user_input = input("Please enter at Crypto ticker: ")
     ticker = f'{user_input.upper()}-USD'
     time = 86400 # currently looking at daily TF
     Lookback_date = '2015-01-01-00-00'
@@ -17,6 +17,11 @@ def get_user_crypto():
 
 def get_user_forex():
     today = datetime.today()
+    
+    print("\nEURUSD GBPUSD USDJPY AUDUSD USDCAD\n")
+    user_input = input("\nPlease enter at Forex ticker: \n")
+
+    ticker = f'{user_input.upper()}-USD'
     # Format the date as yyyy-mm-dd
     formatted_date = today.strftime('%Y-%m-%d')
     forex_pair = "GBPUSD=X"
@@ -24,10 +29,9 @@ def get_user_forex():
     start_date = "1900-01-01"
     end_date = formatted_date
     # Download the historical data
-    data = yf.download(forex_pair, start=start_date, end=end_date)
+    pre_pross = yf.download(forex_pair, start=start_date, end=end_date)
 
-    print(data)
-    pass
+    return pre_pross, ticker
 
 def get_historical_data():
     ticker = 'BTC-USD'
