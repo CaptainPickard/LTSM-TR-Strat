@@ -44,7 +44,12 @@ def mlm_model(pre_pross):
     model = Model(inputs=lstm_input, outputs=output)
     adam = optimizers.Adam()
     model.compile(optimizer=adam, loss='mse')
-    model.fit(x=X_train_normalized, y=y_train, batch_size=15, epochs=50, shuffle=True, validation_split = 0.1)
+    model.fit(x=X_train_normalized, 
+              y=y_train, 
+              batch_size=15, 
+              epochs=50, 
+              shuffle=True, 
+              validation_split = 0.1)
 
     y_pred = model.predict(X_test_normalized)
     train_x = model.predict(X_train_normalized)

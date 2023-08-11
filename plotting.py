@@ -14,8 +14,8 @@ def plotting(pre_pross, y_test, y_pred_original_scale):
     # time_500 = pre_pross['time'][-500:]
 
     # Last 500 Rows of Dataset
-    y_test_500 = y_test[-500:]
-    y_pred_500 = y_pred_original_scale[-500:]
+    y_test_500 = y_test[-100:]
+    y_pred_500 = y_pred_original_scale[-100:]
 
     # Last 50 Rows of Price
     x_close_50 = pre_pross['close'][-50:]
@@ -43,7 +43,7 @@ def plotting(pre_pross, y_test, y_pred_original_scale):
     axes[0, 1].plot(y_test_500, color = 'black', label = 'Test')
     axes[0, 1].plot(y_pred_500, color = 'red', label = 'Pred')
     axes[0, 1].legend()
-    axes[0, 1].set_title('Last 500 Rows of Dataset')
+    axes[0, 1].set_title('Last 100 Rows of Dataset')
     axes[0, 1].grid(True)
 
     # PRICE SHORT

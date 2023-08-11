@@ -14,7 +14,6 @@ def get_user_crypto():
     return pre_pross, ticker
 
 
-
 def get_historical_data():
     ticker = 'BTC-USD'
     # denoted in seconds
