@@ -1,5 +1,5 @@
 from historic_data import get_user_crypto
-from data_prep import format_data
+from data_prep import *
 from PMP import mlm_model
 from plotting import plotting
 from data_save import save_to_csv
@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
     while True:
         post_pross, ticker = get_user_crypto()
-        x_pross = format_data(post_pross)
+        x_pross = format_crypto_data(post_pross)
         plot1, plot2, plot3 = mlm_model(x_pross)
         
         print(f"\n Asset: {ticker}\n")
