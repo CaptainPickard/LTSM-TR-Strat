@@ -4,10 +4,10 @@ import datetime
 def save_to_csv(variable1, variable2, ticker):
     # Get today's date
     today = datetime.date.today()
-    headers = ['Date', 'Actual', 'Prediction', 'Ticker']
+    headers = ['Date', 'Prediction', 'Actual',  'Ticker']
     
     # Create a DataFrame
-    data = {'Date': [today], 'Actual': [variable1], 'Prediction': [variable2], 'Ticker': ticker}
+    data = {'Date': [today], 'Actual': [variable2], 'Prediction': [variable1], 'Ticker': ticker}
     df = pd.DataFrame(data, columns=headers)
     
     # Check if the CSV file already exists
