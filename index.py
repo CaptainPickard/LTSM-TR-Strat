@@ -2,6 +2,7 @@ from historic_data import get_user_crypto
 from data_prep import format_data
 from PMP import mlm_model
 from plotting import plotting
+from data_save import save_to_csv
 
 if __name__ == '__main__':
 
@@ -19,8 +20,14 @@ if __name__ == '__main__':
         print(f'\n Tmorrows {ticker} Predicted Gain/loss: {test_element2}%\n')
 
         plotting(plot1, plot2, plot3)
-
-        user_input = input("\nWould you like to try anoter Crypto? (Y/N): ").upper()
+        
+        user_save = input("\nSave this Prediction (Y/N): ").upper()
+        if user_save == 'N':
+            continue
+        elif user_save == 'Y':
+            save_to_csv(last_element1, test_element2, ticker)
+        
+        user_input = input("\nTry anoter Crypto? (Y/N): ").upper()
         if user_input == 'N':
             break
         elif user_input == 'Y':
