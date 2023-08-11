@@ -1,4 +1,6 @@
 from Historic_Crypto import HistoricalData
+from datetime import datetime
+import yfinance as yf
 import pandas as pd 
 import os
 
@@ -13,6 +15,19 @@ def get_user_crypto():
     pre_pross = pd.DataFrame(new)
     return pre_pross, ticker
 
+def get_user_forex():
+    today = datetime.today()
+    # Format the date as yyyy-mm-dd
+    formatted_date = today.strftime('%Y-%m-%d')
+    forex_pair = "GBPUSD=X"
+    # Define the start and end dates for the data you want
+    start_date = "1900-01-01"
+    end_date = formatted_date
+    # Download the historical data
+    data = yf.download(forex_pair, start=start_date, end=end_date)
+
+    print(data)
+    pass
 
 def get_historical_data():
     ticker = 'BTC-USD'
