@@ -12,14 +12,14 @@ def save_to_csv(variable1, variable2, ticker):
     
     # Check if the CSV file already exists
     try:
-        existing_df = pd.read_csv(f'Predictions\{ticker}_predictions.csv')
+        existing_df = pd.read_csv(f'\Predictions\{ticker}_predictions.csv')
         df = pd.concat([existing_df, df], ignore_index=True)
     except FileNotFoundError:
-        df.to_csv(f'Predictions\{ticker}_predictions.csv', index=False)
+        df.to_csv(f'\Predictions\{ticker}_predictions.csv', index=False)
         return
     
     # Save the DataFrame to CSV
-    df.to_csv(f'Predictions\{ticker}_predictions.csv', index=False)
+    df.to_csv(f'\Predictions\{ticker}_predictions.csv', index=False)
 
 
 

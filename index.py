@@ -23,7 +23,7 @@ if __name__ == '__main__':
         
         user_save = input("\nSave this Prediction (Y/N): ").upper()
         if user_save == 'N':
-            continue
+            pass
         elif user_save == 'Y':
             save_to_csv(last_element1, test_element2, ticker)
         
