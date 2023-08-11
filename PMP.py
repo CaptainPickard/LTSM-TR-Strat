@@ -55,11 +55,11 @@ def mlm_model(pre_pross):
     train_x = model.predict(X_train_normalized)
 
     scaling_factors_pred = np.max(y_train, axis=0)
-    scaling_factors_train = np.max(y_test, axis=0)
+    scaling_factors_train = np.max(y_test, axis=1)
 
     # Inverse transform the scaled predictions 'y_pred' to the original scale
     y_pred_original_scale = y_pred * scaling_factors_pred
-    # y_train_original_scale = train_x * scaling_factors_train
+    y_train_original_scale = train_x * scaling_factors_train
     
     # for middle return value y_train was used previously
     return pre_pross, y_train, y_pred_original_scale
