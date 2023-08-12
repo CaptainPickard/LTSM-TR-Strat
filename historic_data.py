@@ -7,7 +7,7 @@ import os
 
 # Gets Crypto Asstet
 def get_user_crypto():
-    user_input = input("Please enter at Crypto ticker: ")
+    user_input = input("\nPlease enter at Crypto ticker: ")
     ticker = f'{user_input.upper()}-USD'
     time = 86400 # currently looking at daily TF
     Lookback_date = '2015-01-01-00-00'
@@ -19,7 +19,7 @@ def get_user_crypto():
 def get_user_forex():
     today = datetime.today()
     print("\nEURUSD GBPUSD USDJPY AUDUSD USDCAD\n")
-    user_input = input("\nPlease enter at Forex ticker: \n")
+    user_input = input("\nPlease enter at Forex ticker: ")
     ticker = f'{user_input.upper()}=x'
     formatted_date = today.strftime('%Y-%m-%d')
     forex_pair = ticker

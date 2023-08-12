@@ -1,8 +1,8 @@
-
+import mplfinance as mpf
 import matplotlib.pyplot as plt
 
 
-def plotting(pre_pross, y_test, y_pred_original_scale):
+def plotting(pre_pross, y_test, y_pred_original_scale, date_data):
     print('\n**Defining and plotting the data**\n')
 
     # Plotting 4 different timeframes of the output data
