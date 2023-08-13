@@ -29,9 +29,12 @@ def plotting_crypt(pre_pross, y_test, y_pred_original_scale, df_reset):
     # Last 50 Rows of Dataset
     y_test_50 = y_test[-50:]
     y_pred_50 = y_pred_original_scale[-50:]
-
+    x_data_500.set_index('date', inplace=True)
+    
+    
+    
     fig, axes = plt.subplots(2, 2, figsize=(14, 9))
-
+    
     # PRICE LONG
     axes[0, 0].plot(x_close_500, color = 'black', label = 'Close Price')
     axes[0, 0].plot(x_ema_500, color = 'green', label = '50 EMA')
