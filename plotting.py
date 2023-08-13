@@ -1,6 +1,5 @@
-import mplfinance as mpf
+import pandas as pd
 import matplotlib.pyplot as plt
-
 
 def plotting_crypt(pre_pross, y_test, y_pred_original_scale, df_reset):
     print('\n**Defining and plotting the data**\n')
@@ -8,7 +7,7 @@ def plotting_crypt(pre_pross, y_test, y_pred_original_scale, df_reset):
     # Plotting 4 different timeframes of the output data
     # Last 500 Rows of Price
     x_data_500 = df_reset[-500:]
-    print(x_data_500)
+
     x_close_500 = pre_pross['close'][-500:]
     x_ema_500 = pre_pross['EMA50'][-500:]
     x_ema_200 = pre_pross['EMA200'][-500:]
@@ -29,13 +28,13 @@ def plotting_crypt(pre_pross, y_test, y_pred_original_scale, df_reset):
     # Last 50 Rows of Dataset
     y_test_50 = y_test[-50:]
     y_pred_50 = y_pred_original_scale[-50:]
-    x_data_500.set_index('date', inplace=True)
+    # x_data_500.set_index('date', inplace=True)
     
     
     
-    fig, axes = plt.subplots(2, 2, figsize=(14, 9))
+    fig, axes = plt.subplots(2, 2, figsize=(9, 5))
+
     
-    # PRICE LONG
     axes[0, 0].plot(x_close_500, color = 'black', label = 'Close Price')
     axes[0, 0].plot(x_ema_500, color = 'green', label = '50 EMA')
     axes[0, 0].plot(x_ema_200, color = 'red', label = '200 EMA')
@@ -76,7 +75,7 @@ def plotting_forex(pre_pross, y_test, y_pred_original_scale, df_reset):
 
     # Plotting 4 different timeframes of the output data
     # Last 500 Rows of Price
-    x_data_500 = df_reset[-500:]
+    # x_data_500 = df_reset[-500:]
     x_close_500 = pre_pross['close'][-500:]
     x_ema_500 = pre_pross['EMA50'][-500:]
     x_ema_200 = pre_pross['EMA200'][-500:]
@@ -88,7 +87,7 @@ def plotting_forex(pre_pross, y_test, y_pred_original_scale, df_reset):
     y_pred_500 = y_pred_original_scale[-100:]
 
     # Last 50 Rows of Price
-    x_data_500 = df_reset[-50:]
+    # x_data_500 = df_reset[-50:]
     x_close_50 = pre_pross['close'][-50:]
     x_ema_50 = pre_pross['EMA50'][-50:]
     x_ema_5 = pre_pross['EMA5'][-50:]
@@ -99,7 +98,7 @@ def plotting_forex(pre_pross, y_test, y_pred_original_scale, df_reset):
     y_test_50 = y_test[-50:]
     y_pred_50 = y_pred_original_scale[-50:]
 
-    axes = plt.subplots(2, 2, figsize=(14, 9))
+    fig, axes = plt.subplots(2, 2, figsize=(14, 9))
 
     # PRICE LONG
     axes[0, 0].plot(x_close_500, color = 'black', label = 'Close Price')
