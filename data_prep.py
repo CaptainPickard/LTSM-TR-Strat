@@ -66,4 +66,4 @@ def format_forex_data(pre_pross):
     print('\n**Forex Formatting Data Complete**\n')
     
     # pre_pross.to_csv('test_pross.csv')
-    return pre_pross, df_reset
+    return pre_pross

@@ -32,7 +32,7 @@ def plotting_crypt(pre_pross, y_test, y_pred_original_scale, df_reset):
     
     
     
-    fig, axes = plt.subplots(2, 2, figsize=(9, 5))
+    fig, axes = plt.subplots(2, 2, figsize=(10, 5))
 
     
     axes[0, 0].plot(x_close_500, color = 'black', label = 'Close Price')
@@ -70,7 +70,7 @@ def plotting_crypt(pre_pross, y_test, y_pred_original_scale, df_reset):
     plt.show()
     
     
-def plotting_forex(pre_pross, y_test, y_pred_original_scale, df_reset):
+def plotting_forex(pre_pross, y_test, y_pred_original_scale):
     print('\n**Defining and plotting the data**\n')
 
     # Plotting 4 different timeframes of the output data
@@ -98,7 +98,7 @@ def plotting_forex(pre_pross, y_test, y_pred_original_scale, df_reset):
     y_test_50 = y_test[-50:]
     y_pred_50 = y_pred_original_scale[-50:]
 
-    fig, axes = plt.subplots(2, 2, figsize=(14, 9))
+    fig, axes = plt.subplots(2, 2, figsize=(10, 5))
 
     # PRICE LONG
     axes[0, 0].plot(x_close_500, color = 'black', label = 'Close Price')
