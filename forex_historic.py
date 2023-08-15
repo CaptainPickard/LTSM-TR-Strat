@@ -17,5 +17,3 @@ def get_user_forex():
     end_date = formatted_date
     pre_pross = yf.download(forex_pair, start=start_date, end=end_date)
     print(pre_pross)
-
-get_user_forex()
