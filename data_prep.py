@@ -33,7 +33,6 @@ def format_crypto_data(pre_pross):
 
 # FOR FOREX
 def format_forex_data(pre_pross):
-
     
     pre_pross.rename(columns={'Open': 'open'}, inplace=True)
     pre_pross.rename(columns={'High': 'high'}, inplace=True)

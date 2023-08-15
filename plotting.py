@@ -73,11 +73,11 @@ def plotting_crypt(pre_pross, y_test, y_pred_original_scale, df_reset):
 def plotting_forex(pre_pross, y_test, y_pred_original_scale, df_reset):
     print('\n**Defining and plotting the data**\n')
 
-    time_short = df_reset['date'][-500:]
-    price_short = df_reset['close'][-500:]
+    time_short = [i for i in range(1, 51)]
+    price_short = df_reset['close'][-50:]
     
-    time_long = df_reset['date'][-50:]
-    price_long = df_reset['close'][-50:]
+    time_long = [i for i in range(1, 501)]
+    price_long = df_reset['close'][-500:]
     
     model_short = LinearRegression()
     model_long = LinearRegression()
@@ -145,10 +145,7 @@ def plotting_forex(pre_pross, y_test, y_pred_original_scale, df_reset):
     axes[1, 0].grid(True)
 
     # PREDICTION SHORT
-    # axes[1, 1].plot(y_test_50, color = 'black', label = 'Test')
     axes[1, 1].set_title("Forex Trading Pair Price Trends")
-    axes[1, 1].xlabel("Time")
-    axes[1, 1].ylabel("Price")
     axes[1, 1].scatter(time_short, price_short, color='blue', label='Short-term Data')
     axes[1, 1].scatter(time_long, price_long, color='orange', label='Long-term Data')
     axes[1, 1].plot(time_short, price_pred_short, color='blue', linestyle='dashed', label='Short-term Trend')
