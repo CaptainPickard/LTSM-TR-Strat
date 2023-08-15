@@ -145,7 +145,7 @@ def plotting_forex(pre_pross, y_test, y_pred_original_scale, df_reset):
     axes[1, 0].grid(True)
 
     # PREDICTION SHORT
-    axes[1, 1].plot(y_test_50, color = 'black', label = 'Test')
+    # axes[1, 1].plot(y_test_50, color = 'black', label = 'Test')
     axes[1, 1].set_title("Forex Trading Pair Price Trends")
     axes[1, 1].xlabel("Time")
     axes[1, 1].ylabel("Price")
