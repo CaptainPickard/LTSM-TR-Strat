@@ -27,7 +27,7 @@ if __name__ == '__main__':
             
         elif get_asset_input == 'F':
             post_pross, ticker = get_user_forex()
-            x_pross = format_forex_data(post_pross)
+            x_pross, date_data = format_forex_data(post_pross)
             plot1, plot2, plot3 = mlm_model(x_pross)
             
             print(f"\n Asset: {ticker}\n")
@@ -38,7 +38,7 @@ if __name__ == '__main__':
             test_element2 = (plot2[-1])
             print(f'\n Todays {ticker} Actual Gain/loss: {test_element2}%\n')
 
-            plotting_forex(plot1, plot2, plot3)
+            plotting_forex(plot1, plot2, plot3, date_data)
         
         
         user_save = input("\nSave this Prediction (Y/N): ").upper()

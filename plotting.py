@@ -70,7 +70,7 @@ def plotting_crypt(pre_pross, y_test, y_pred_original_scale, df_reset):
     plt.show()
     
     
-def plotting_forex(pre_pross, y_test, y_pred_original_scale):
+def plotting_forex(pre_pross, y_test, y_pred_original_scale, df_reset):
     print('\n**Defining and plotting the data**\n')
 
     # Plotting 4 different timeframes of the output data
